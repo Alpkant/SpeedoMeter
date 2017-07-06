@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/settings">
+
+    <SwitchPreference
+        android:key="auto_average"
+        android:title="@string/pref_auto_average"
+        android:summary="@string/pref_auto_average_summary"
+        />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/app_info">
+
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
