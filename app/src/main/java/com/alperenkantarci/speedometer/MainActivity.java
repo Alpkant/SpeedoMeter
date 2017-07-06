@@ -166,12 +166,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
         satellite = (TextView) findViewById(R.id.satellite);
-        status = (TextView) findViewById(R.id.status);
-        accuracy = (TextView) findViewById(R.id.accuracy);
-        maxSpeed = (TextView) findViewById(R.id.maxSpeed);
+        status =    (TextView) findViewById(R.id.status);
+        accuracy =  (TextView) findViewById(R.id.accuracy);
+        maxSpeed =  (TextView) findViewById(R.id.maxSpeed);
         averageSpeed = (TextView) findViewById(R.id.averageSpeed);
-        distance = (TextView) findViewById(R.id.distance);
-        time = (Chronometer) findViewById(R.id.time);
+        distance =  (TextView) findViewById(R.id.distance);
+        time =      (Chronometer) findViewById(R.id.time);
         currentSpeed = (TextView) findViewById(R.id.currentSpeed);
         progressBarCircularIndeterminate = (ProgressBarCircularIndeterminate) findViewById(R.id.progressBarCircularIndeterminate);
 

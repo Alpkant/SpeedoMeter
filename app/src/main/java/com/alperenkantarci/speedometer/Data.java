@@ -32,11 +32,11 @@ public class Data {
     }
 
     public Data() {
-        isRunning = false;
-        distanceKm = 0;
-        distanceM = 0;
-        curSpeed = 0;
-        maxSpeed = 0;
+        isRunning   = false;
+        distanceKm  = 0;
+        distanceM   = 0;
+        curSpeed    = 0;
+        maxSpeed    = 0;
         timeStopped = 0;
     }
 
@@ -46,7 +46,7 @@ public class Data {
     }
 
     public void addDistance(double distance){
-        distanceM = distanceM + distance;
+        distanceM += + distance;
         distanceKm = distanceM / 1000f;
     }
 
