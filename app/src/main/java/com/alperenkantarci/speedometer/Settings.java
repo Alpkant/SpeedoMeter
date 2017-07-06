@@ -9,7 +9,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 
 /**
- * Created by fly on 19/04/15.
+ * Created by fly on 06/07/17.
  */
 public class Settings extends ActionBarActivity {
 

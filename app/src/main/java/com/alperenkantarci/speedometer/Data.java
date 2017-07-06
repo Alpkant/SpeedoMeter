@@ -4,7 +4,7 @@ import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
 
 /**
- * Created by fly on 17/04/15.
+ * Created by Alperen on 06/07/17.
  */
 public class Data {
     private boolean isRunning;
