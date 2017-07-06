@@ -105,22 +105,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
                         data = new Data(onGpsServiceUpdate);
-
                     }
 
                 } else {
-
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-
                 }
                 return;
-
             }
-
         }
-
-
     }
 
     @Override
