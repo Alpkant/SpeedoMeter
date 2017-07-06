@@ -144,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener,
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.INVISIBLE);
 

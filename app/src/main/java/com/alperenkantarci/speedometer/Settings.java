@@ -19,7 +19,7 @@ public class Settings extends ActionBarActivity {
         setContentView(R.layout.activity_settings);
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.settingstoolbar);
-        setSupportActionBar(toolbar);
+      //  setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
