@@ -10,17 +10,25 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.NotificationCompat.WearableExtender;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.RequiresApi;
 
 public class GpsServices extends Service implements LocationListener, GpsStatus.Listener {
     private LocationManager mLocationManager;
 
     Location lastlocation = new Location("last");
     Data data;
+    String NOTIFICATION_ID = "1";
+    int WEAR_REQUEST_CODE = 3;
+    int WEAR_REQUEST_CODE_2 = 4;
 
-    double currentLon=0 ;
-    double currentLat=0 ;
+    double currentLon = 0;
+    double currentLat = 0;
     double lastLon = 0;
     double lastLat = 0;
 
@@ -38,17 +46,17 @@ public class GpsServices extends Service implements LocationListener, GpsStatus.
         updateNotification(false);
 
         mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        mLocationManager.addGpsStatusListener( this);
+        mLocationManager.addGpsStatusListener(this);
         mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, this);
     }
 
     public void onLocationChanged(Location location) {
         data = MainActivity.getData();
-        if (data.isRunning()){
+        if (data.isRunning()) {
             currentLat = location.getLatitude();
             currentLon = location.getLongitude();
 
-            if (data.isFirstTime()){
+            if (data.isFirstTime()) {
                 lastLat = currentLat;
                 lastLon = currentLon;
                 data.setFirstTime(false);
@@ -58,7 +66,7 @@ public class GpsServices extends Service implements LocationListener, GpsStatus.
             lastlocation.setLongitude(lastLon);
             double distance = lastlocation.distanceTo(location);
 
-            if (location.getAccuracy() < distance){
+            if (location.getAccuracy() < distance) {
                 data.addDistance(distance);
 
                 lastLat = currentLat;
@@ -67,7 +75,7 @@ public class GpsServices extends Service implements LocationListener, GpsStatus.
 
             if (location.hasSpeed()) {
                 data.setCurSpeed(location.getSpeed() * 3.6);
-                if(location.getSpeed() == 0){
+                if (location.getSpeed() == 0) {
                     new isStillStopped().execute();
                 }
             }
@@ -76,15 +84,16 @@ public class GpsServices extends Service implements LocationListener, GpsStatus.
         }
     }
 
-    public void updateNotification(boolean asData){
-        Notification.Builder builder = new Notification.Builder(getBaseContext())
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT_WATCH)
+    public void updateNotification(boolean asData) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getBaseContext())
                 .setContentTitle(getString(R.string.running))
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentIntent(contentIntent);
 
-        if(asData){
+        if (asData) {
             builder.setContentText(String.format(getString(R.string.notification), data.getMaxSpeed(), data.getDistance()));
-        }else{
+        } else {
             builder.setContentText(String.format(getString(R.string.notification), '-', '-'));
         }
         Notification notification = builder.build();
@@ -95,14 +104,14 @@ public class GpsServices extends Service implements LocationListener, GpsStatus.
     public int onStartCommand(Intent intent, int flags, int startId) {
         // If we get killed, after returning from here, restart
         return START_STICKY;
-    }   
-       
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
         // We don't provide binding, so return null
         return null;
     }
-   
+
     /* Remove the locationlistener updates when Services is stopped */
     @Override
     public void onDestroy() {
@@ -112,19 +121,24 @@ public class GpsServices extends Service implements LocationListener, GpsStatus.
     }
 
     @Override
-    public void onGpsStatusChanged(int event) {}
+    public void onGpsStatusChanged(int event) {
+    }
 
     @Override
-    public void onProviderDisabled(String provider) {}
-   
+    public void onProviderDisabled(String provider) {
+    }
+
     @Override
-    public void onProviderEnabled(String provider) {}
-   
+    public void onProviderEnabled(String provider) {
+    }
+
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {}
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
 
     class isStillStopped extends AsyncTask<Void, Integer, String> {
         int timer = 0;
+
         @Override
         protected String doInBackground(Void... unused) {
             try {
